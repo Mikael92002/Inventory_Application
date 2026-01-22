@@ -16,6 +16,7 @@ CONSTRAINT unique_item UNIQUE(category, item)
 INSERT INTO inventory(category, item, price, imageURL, quantity)
 VALUES
 ('Clothes', NULL, NULL, NULL, NULL),
+('Games', NULL, NULL, NULL, NULL),
 ('Games', 'Red Dead Redemption 2', 79.99, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9aWi973YDg9sm9j4v6Yg4q1hYsFKmr0vAfA&s', 1),
 ('Clothes', 'Jammies', 35.99, 'https://cdni.llbean.net/is/image/wim/510853_51692_41?hei=1095&wid=950&resMode=sharp2&defaultImage=llbprod/510853_51692_41', 2),
 ('Games', 'Burnout: Paradise', 79.99, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk-ktoqjiKOpmnlfVzUONoIOZrhnjr3HTdvfpRDnc1RQK3wKMqDXW6JOGcg2ghJswHAYEu&s=10', 1)`;
