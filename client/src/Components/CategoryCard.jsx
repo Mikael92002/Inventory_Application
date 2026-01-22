@@ -1,14 +1,17 @@
+import { Link } from "react-router";
+
 const CategoryCard = ({
   category,
   quantity,
   item,
   deleteItem,
   deleteCategory,
+  setItemCategory,
 }) => {
   return (
     <div className="category-card">
       <h2 className="category-title">
-        {category}{" "}
+        <span>{category}</span>
         <svg
           fill="black"
           width="20px"
@@ -31,6 +34,9 @@ const CategoryCard = ({
           <path d="M30 12h-2v-1c0-.6-.4-1-1-1h-4c-.6 0-1 .4-1 1v1h-2v-1c0-1.7 1.3-3 3-3h4c1.7 0 3 1.3 3 3v1z" />
           <path d="M31 40H19c-1.6 0-3-1.3-3.2-2.9l-1.8-24 2-.2 1.8 24c0 .6.6 1.1 1.2 1.1h12c.6 0 1.1-.5 1.2-1.1l1.8-24 2 .2-1.8 24C34 38.7 32.6 40 31 40z" />
         </svg>
+        <span>
+          <Link to="/itemForm" onClick={()=> setItemCategory(category)}>Add item</Link>
+        </span>
       </h2>
       <strong>
         {quantity > 1 ? (
@@ -45,7 +51,9 @@ const CategoryCard = ({
         {item.map((item) => {
           return (
             <div key={item.id} className="item">
-              <span className="item-name">{item.name} </span>
+              <span className="item-name">
+                {item.name} <span>Qty: {item.qty}</span>
+              </span>
               <svg
                 fill="black"
                 width="20px"

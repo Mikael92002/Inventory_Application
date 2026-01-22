@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { getAllData, deleteItem, deleteCategory } from "./fetch";
+import { getAllData, deleteItem, deleteCategory, addCategory } from "./fetch";
 import { useParams } from "react-router";
 import { Link } from "react-router";
 import ErrorPage from "./ErrorPage";
 import Home from "./Components/Home";
 import Header from "./Components/Header";
+import ItemAddForm from "./Components/ItemAddForm";
 
 function Page() {
   const { currPage } = useParams();
   const [categories, setCategories] = useState([]);
+  const [itemCategory, setItemCategory] = useState("");
 
   // delete logic (in sql):
   // if user selects to delete whole category:
@@ -81,7 +83,7 @@ function Page() {
           return newArr;
         });
       } else {
-        throw Error("Database Error:");
+        throw Error("Delete item error");
       }
     } catch (err) {
       console.error(err);
@@ -89,18 +91,52 @@ function Page() {
   }
 
   async function deleteCategoryFromViewAndDb(categoryName) {
-    const resultOfDelete = await deleteCategory(categoryName);
     try {
+      const resultOfDelete = await deleteCategory(categoryName);
       if (resultOfDelete) {
         setCategories((prevCategory) => {
           return prevCategory.filter((category) => {
             return category.category !== categoryName;
           });
         });
+      } else {
+        throw Error("Error at delete category");
       }
     } catch (err) {
       console.error(err);
     }
+  }
+
+  async function addCategoryToViewAndDb(categoryName) {
+    if (categoryInputValidation(categoryName)) {
+      try {
+        const fetchResult = await addCategory(categoryName);
+        const newCategory = {
+          id: fetchResult.id,
+          category: fetchResult.category,
+          item: [],
+        };
+        if (fetchResult !== null) {
+          setCategories((prevCategory) => {
+            return [...prevCategory, newCategory];
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      alert("Category already exists!");
+    }
+  }
+
+  function categoryInputValidation(categoryName) {
+    let validatedCategoryName = categoryName.trim().toLowerCase();
+    for (let category of categories) {
+      if (category.category.trim().toLowerCase() === validatedCategoryName) {
+        return false;
+      }
+    }
+    return true;
   }
 
   useEffect(() => {
@@ -122,13 +158,18 @@ function Page() {
       <Header></Header>
       {currPage === undefined ? (
         <>
-          <button onClick={() => console.log(categories)}>Click moi</button>
           <Home
             categoryArray={categories}
             deleteItem={deleteItemFromViewAndDb}
-            deleteCategory = {deleteCategoryFromViewAndDb}
+            deleteCategory={deleteCategoryFromViewAndDb}
+            addCategory={addCategoryToViewAndDb}
+            setItemCategory={setItemCategory}
           ></Home>
           <div></div>
+        </>
+      ) : currPage === "itemForm" ? (
+        <>
+          <ItemAddForm category={itemCategory}></ItemAddForm>
         </>
       ) : (
         <ErrorPage></ErrorPage>

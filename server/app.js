@@ -5,6 +5,8 @@ const categoryRoute = require("./routes/categoryRoute");
 const path = require("node:path");
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", indexRoute);
 app.use("/api/items", itemRoute);
