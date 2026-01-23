@@ -7,6 +7,7 @@ const CategoryCard = ({
   deleteItem,
   deleteCategory,
   setItemCategory,
+  setCategoriesState,
 }) => {
   return (
     <div className="category-card">
@@ -23,7 +24,7 @@ const CategoryCard = ({
             confirm(
               `Are you sure you want to delete this category: ${category}`,
             )
-              ? deleteCategory(category)
+              ? deleteCategory(category, setCategoriesState)
               : null;
           }}
         >
@@ -35,7 +36,9 @@ const CategoryCard = ({
           <path d="M31 40H19c-1.6 0-3-1.3-3.2-2.9l-1.8-24 2-.2 1.8 24c0 .6.6 1.1 1.2 1.1h12c.6 0 1.1-.5 1.2-1.1l1.8-24 2 .2-1.8 24C34 38.7 32.6 40 31 40z" />
         </svg>
         <span>
-          <Link to="/itemForm" onClick={()=> setItemCategory(category)}>Add item</Link>
+          <Link to="/itemForm" onClick={() => setItemCategory(category)}>
+            Add item
+          </Link>
         </span>
       </h2>
       <strong>
@@ -65,7 +68,7 @@ const CategoryCard = ({
                   confirm(
                     `Are you sure you want to delete this item: ${item.name}`,
                   )
-                    ? deleteItem(item.id)
+                    ? deleteItem(item.id, setCategoriesState)
                     : null;
                 }}
               >
@@ -80,9 +83,6 @@ const CategoryCard = ({
           );
         })}
       </div>
-      {/* When following is clicked, sql query WHERE category = given category */}
-      {/* Should display all items in clicked category: */}
-      {/* <Link to="/item">Click to expand category</Link> */}
     </div>
   );
 };

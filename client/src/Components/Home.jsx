@@ -7,6 +7,7 @@ const Home = ({
   deleteCategory,
   addCategory,
   setItemCategory,
+  setCategoriesState,
 }) => {
   const [categoryInput, setCategoryInput] = useState("");
 
@@ -23,8 +24,17 @@ const Home = ({
           name="categoryName"
           id="categoryName"
           onChange={(e) => handleCategoryInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key.toLowerCase() === "enter") {
+              addCategory(categoryInput, setCategoriesState, categoryArray);
+            }
+          }}
         />
-        <button onClick={() => addCategory(categoryInput)}>
+        <button
+          onClick={() =>
+            addCategory(categoryInput, setCategoriesState, categoryArray)
+          }
+        >
           Add New Category
         </button>
       </label>
@@ -45,6 +55,7 @@ const Home = ({
                 deleteItem={deleteItem}
                 deleteCategory={deleteCategory}
                 setItemCategory={setItemCategory}
+                setCategoriesState={setCategoriesState}
               ></CategoryCard>
             );
           })

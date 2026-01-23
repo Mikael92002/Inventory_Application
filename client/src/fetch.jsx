@@ -61,25 +61,24 @@ export async function addCategory(categoryName) {
   }
 }
 
-export async function addItem(categoryName, item, price, imageURL) {
+export async function addItem(data) {
   try {
     const response = await fetch(`api/items`, {
       method: "POST",
-      "Content-Type": "application/json",
-      body: JSON.stringify({
-        category: categoryName,
-        item: item,
-        price: price,
-        imageURL: imageURL,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
+    const result = await response.json();
     if (response.ok) {
       console.log("Item successfully added");
-      return response.json();
+      return [response, result];
     } else {
-      throw Error("Server error: " + response.status);
+      return [response, result];
     }
   } catch (err) {
     console.error(err);
+    return [null, null];
   }
 }
