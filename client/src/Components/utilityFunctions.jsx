@@ -44,7 +44,8 @@ export function makeCategoryArray(data) {
   }
 
   export async function addCategoryToViewAndDb(categoryName, setCategories, categoriesArr, setInputField) {
-    if (categoryInputValidation(categoryName, categoriesArr)) {
+    let inputVal = categoryInputValidation(categoryName, categoriesArr);
+    if (inputVal === "valid") {
       try {
         const fetchResult = await addCategory(categoryName);
         const newCategory = {
@@ -62,18 +63,21 @@ export function makeCategoryArray(data) {
         console.error(err);
       }
     } else {
-      alert("Category already exists!");
+      alert(inputVal);
     }
   }
 
   export function categoryInputValidation(categoryName, categoriesArr) {
     let validatedCategoryName = categoryName.trim().toLowerCase();
     for (let category of categoriesArr) {
-      if (category.category.trim().toLowerCase() === validatedCategoryName && validatedCategoryName.length<=0 && validatedCategoryName.length<=20) {
-        return false;
+      if (category.category.trim().toLowerCase() === validatedCategoryName) {
+        return "Category already exists!";
+      }
+      else if(validatedCategoryName.length<=0 || validatedCategoryName.length<=20){
+        return "Category name must be greater than 0 characters and less than or equal to 20!"
       }
     }
-    return true;
+    return "valid";
   }
 
     export async function deleteItemFromViewAndDb(itemID, setCategories) {
