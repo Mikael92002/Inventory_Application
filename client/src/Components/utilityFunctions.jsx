@@ -44,7 +44,7 @@ export function makeCategoryArray(data) {
     return arr;
   }
 
-  export async function addCategoryToViewAndDb(categoryName, setCategories, categoriesArr) {
+  export async function addCategoryToViewAndDb(categoryName, setCategories, categoriesArr, setInputField) {
     if (categoryInputValidation(categoryName, categoriesArr)) {
       try {
         const fetchResult = await addCategory(categoryName);
@@ -57,6 +57,7 @@ export function makeCategoryArray(data) {
           setCategories((prevCategory) => {
             return [...prevCategory, newCategory];
           });
+          setInputField("");
         }
       } catch (err) {
         console.error(err);

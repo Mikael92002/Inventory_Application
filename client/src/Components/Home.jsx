@@ -7,7 +7,7 @@ const Home = ({
   deleteCategory,
   addCategory,
   setItemCategory,
-  setCategoriesState,
+  setCategoriesState
 }) => {
   const [categoryInput, setCategoryInput] = useState("");
 
@@ -26,13 +26,13 @@ const Home = ({
           onChange={(e) => handleCategoryInput(e.target.value)}
           onKeyDown={(e) => {
             if (e.key.toLowerCase() === "enter") {
-              addCategory(categoryInput, setCategoriesState, categoryArray);
+              addCategory(categoryInput, setCategoriesState, categoryArray, setCategoryInput);
             }
           }}
         />
-        <button
+        <button className="add-category-button"
           onClick={() =>
-            addCategory(categoryInput, setCategoriesState, categoryArray)
+            addCategory(categoryInput, setCategoriesState, categoryArray, setCategoryInput)
           }
         >
           Add New Category

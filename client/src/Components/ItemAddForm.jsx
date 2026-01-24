@@ -24,9 +24,9 @@ const ItemAddForm = ({ category, categoryArray }) => {
           Item name:
           <input type="text" name="item" id="item" required />
         </label>
-        <label htmlFor="price">
-          Price:
-          <input type="number" name="price" id="price" required />
+        <label htmlFor="quantity">
+          Quantity:
+          <input type="number" name="quantity" id="quantity" required />
         </label>
         <label htmlFor="imageURL">
           Image URL:

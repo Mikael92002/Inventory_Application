@@ -38,7 +38,7 @@
 }
 
 .item-container{
-  height: 50px;
+  height: 75px;
   overflow-y:auto;
 }
 
@@ -76,4 +76,19 @@ h2>span>a{
 }
 label{
   display: block;
+}
+
+#categoryName{
+  background-color: grey;
+  font-size: large;
+  color: black;
+  font-weight: 900;
+}
+.add-category-button{
+  margin-left: 20px;
+  border-radius: 10px;
+  background-color: #f96900;
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: large;
 }

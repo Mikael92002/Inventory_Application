@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { incrementItem, decrementItem } from "../fetch";
 
 const CategoryCard = ({
   category,
@@ -57,6 +58,14 @@ const CategoryCard = ({
               <span className="item-name">
                 {item.name} <span>Qty: {item.qty}</span>
               </span>
+              <div>
+                {item.qty > 0 && (
+                  <button onClick={() => decrementItem(item.id)}>-</button>
+                )}
+                {item.qty < 32767 && (
+                  <button onClick={() => incrementItem(item.id)}>+</button>
+                )}
+              </div>
               <svg
                 fill="black"
                 width="20px"

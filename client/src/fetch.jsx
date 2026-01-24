@@ -63,7 +63,7 @@ export async function addCategory(categoryName) {
 
 export async function addItem(data) {
   try {
-    const response = await fetch(`api/items`, {
+    const response = await fetch(`/api/items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,5 +80,38 @@ export async function addItem(data) {
   } catch (err) {
     console.error(err);
     return [null, null];
+  }
+}
+
+export async function incrementItem(id){
+  try{
+    const response = await fetch(`/api/items/incrementItem/${id}`,{
+      method: "PUT",
+    })
+    if(response.ok){
+      window.location.href = "/";
+    }
+    else{
+      throw Error(response.status);
+    }
+  }catch(err){
+    console.error(err);
+  }
+}
+
+export async function decrementItem(id){
+  try{
+    const response = await fetch(`/api/items/decrementItem/${id}`,{
+      method: "PUT",
+    })
+    if(response.ok){
+      console.log("Item decremented");
+      window.location.href = "/";
+    }
+    else{
+      throw Error(response.status);
+    }
+  }catch(err){
+    console.error(err);
   }
 }

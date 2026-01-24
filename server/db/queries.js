@@ -1,7 +1,7 @@
 const pool = require("./pool");
 
 exports.getAllRows = async () => {
-  const { rows } = await pool.query("SELECT * FROM inventory;");
+  const { rows } = await pool.query("SELECT * FROM inventory ORDER BY item ASC;");
   return rows;
 };
 
@@ -22,11 +22,21 @@ exports.addCategory = async (categoryName) => {
   return rows;
 };
 
-exports.addItem = async (category, itemName, price, imageURL) => {
+exports.addItem = async (category, itemName, quantity, imageURL) => {
   const { rows } = await pool.query(
     `INSERT INTO inventory(category, item, price, imageURL, quantity)
-  VALUES($1, $2, $3, $4, 1) RETURNING *`,
-    [category, itemName, price, imageURL],
+  VALUES($1, $2, 1, $4, $3) RETURNING *`,
+    [category, itemName, quantity, imageURL],
   );
   return rows;
 };
+
+exports.incrementItem = async(id) =>{
+  const {rows} = await pool.query(`UPDATE inventory SET quantity = quantity + 1 WHERE id = $1`, [id]);
+  return rows;
+}
+
+exports.decrementItem = async(id) =>{
+  const {rows} = await pool.query(`UPDATE inventory SET quantity = quantity - 1 WHERE id = $1`, [id]);
+  return rows;
+}
