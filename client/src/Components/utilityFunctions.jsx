@@ -69,7 +69,7 @@ export function makeCategoryArray(data) {
   export function categoryInputValidation(categoryName, categoriesArr) {
     let validatedCategoryName = categoryName.trim().toLowerCase();
     for (let category of categoriesArr) {
-      if (category.category.trim().toLowerCase() === validatedCategoryName) {
+      if (category.category.trim().toLowerCase() === validatedCategoryName && validatedCategoryName.length<=0 && validatedCategoryName.length<=20) {
         return false;
       }
     }
