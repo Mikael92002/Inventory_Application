@@ -25,8 +25,8 @@ exports.addCategory = async (categoryName) => {
 exports.addItem = async (category, itemName, quantity, imageURL) => {
   const { rows } = await pool.query(
     `INSERT INTO inventory(category, item, price, imageURL, quantity)
-  VALUES($1, $2, 1, $4, $3) RETURNING *`,
-    [category, itemName, quantity, imageURL],
+  VALUES($1, $2, 1, '', $3) RETURNING *`,
+    [category, itemName, quantity],
   );
   return rows;
 };

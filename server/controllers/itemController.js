@@ -17,7 +17,6 @@ const validateItem = [
     .isInt({ min: 0, max: 32767 })
     .withMessage("Quantity must be an integer between 0 and 32767"),
   body("category").notEmpty(),
-  body("imageURL").optional({ values: "falsy" }),
 ];
 
 exports.postItem = [
@@ -27,9 +26,9 @@ exports.postItem = [
     if (!errors.isEmpty()) {
       return res.status(400).send(errors.array());
     }
-    const { item, quantity, imageURL, category } = matchedData(req);
+    const { item, quantity, category } = matchedData(req);
    
-    const result = await dbQueries.addItem(category, item, quantity, imageURL);
+    const result = await dbQueries.addItem(category, item, quantity);
     res.status(200).json(result);
   },
 ];

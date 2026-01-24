@@ -28,10 +28,6 @@ const ItemAddForm = ({ category, categoryArray }) => {
           Quantity:
           <input type="number" name="quantity" id="quantity" required />
         </label>
-        <label htmlFor="imageURL">
-          Image URL:
-          <input type="text" name="imageURL" id="imageURL" />
-        </label>
         <button>Submit</button>
       </form>
     </>
