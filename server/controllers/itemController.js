@@ -27,9 +27,8 @@ exports.postItem = [
     if (!errors.isEmpty()) {
       return res.status(400).send(errors.array());
     }
-    console.log(req.body);
     const { item, quantity, imageURL, category } = matchedData(req);
-    console.log(category);
+   
     const result = await dbQueries.addItem(category, item, quantity, imageURL);
     res.status(200).json(result);
   },
@@ -37,7 +36,7 @@ exports.postItem = [
 
 exports.incrementItemQuantity = async (req, res) => {
   const query = await dbQueries.incrementItem(req.params.itemID);
-  console.log(req.params);
+  
   res.end();
 };
 

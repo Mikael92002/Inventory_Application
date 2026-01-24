@@ -40,7 +40,6 @@ export function makeCategoryArray(data) {
         }
       }
     }
-    console.log(arr);
     return arr;
   }
 

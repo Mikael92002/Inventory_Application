@@ -72,7 +72,6 @@ export async function addItem(data) {
     });
     const result = await response.json();
     if (response.ok) {
-      console.log("Item successfully added");
       return [response, result];
     } else {
       return [response, result];
@@ -105,7 +104,6 @@ export async function decrementItem(id){
       method: "PUT",
     })
     if(response.ok){
-      console.log("Item decremented");
       window.location.href = "/";
     }
     else{

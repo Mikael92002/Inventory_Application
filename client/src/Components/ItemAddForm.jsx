@@ -34,7 +34,6 @@ const ItemAddForm = ({ category, categoryArray }) => {
         </label>
         <button>Submit</button>
       </form>
-      <button onClick={() => console.log(errors)}></button>
     </>
   );
 
@@ -52,10 +51,10 @@ const ItemAddForm = ({ category, categoryArray }) => {
       return;
     }
     const fetchResult = await addItem(dataAsObjects);
-    console.log(fetchResult);
+  
     if (fetchResult[0].ok) {
       setErrors([]);
-      console.log("Item successfully added");
+      
       window.location.href = "/";
     } else {
       setErrors(fetchResult[1]);

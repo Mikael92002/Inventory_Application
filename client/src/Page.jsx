@@ -32,7 +32,6 @@ function Page() {
     const getData = async () => {
       try {
         const dataArray = await getAllData();
-        console.log(dataArray);
         const newCategoryArray = makeCategoryArray(dataArray);
         setCategories(newCategoryArray);
       } catch (err) {
