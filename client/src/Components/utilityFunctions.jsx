@@ -73,7 +73,7 @@ export function makeCategoryArray(data) {
       if (category.category.trim().toLowerCase() === validatedCategoryName) {
         return "Category already exists!";
       }
-      else if(validatedCategoryName.length<=0 || validatedCategoryName.length<=20){
+      else if(validatedCategoryName.length<=0 || validatedCategoryName.length>=20){
         return "Category name must be greater than 0 characters and less than or equal to 20!"
       }
     }
